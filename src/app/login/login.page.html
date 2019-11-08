@@ -1,9 +1,122 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header no-border>
+  <!-- <ion-toolbar>
     <ion-title>login</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
+  <div class="login-header ion-padding" [hidden]="keyboard.isVisible">
+   
+    <img class="logo-img" src="assets/img/graduation2.svg">
+
+    <h3>App de Recordações</h3>
+  </div>
 </ion-header>
 
-<ion-content>
+<ion-content >
+  <div class="center">
+    <div heading-column-lr>
+      <h1 class="headings" big-heading>Login</h1>
+      <h2 class="headings" small-heading> <ion-button size="small">Registrar</ion-button></h2>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+
+      <ion-item>
+        <ion-icon name="contact"></ion-icon>
+        <ion-input type="email" placeholder="Email" formControlName="email" clearInput autocapitalize="off"
+          inputmode="email" [ngClass]="{'is-invalid': 
+          (loginForm.get('email').touched ||
+            loginForm.get('email').dirty) &&
+             !loginForm.get('email').valid }"></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message"
+            *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-icon name="key"></ion-icon>
+        <app-show-hide-password>
+
+          <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+          <ion-icon class="icon-eye" name="eye"></ion-icon>
+        </app-show-hide-password>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message"
+            *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+            <ion-icon name="information-circle-outline"> </ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-label class="forget-password">Recuperar a Senha</ion-label>
+
+      <div linespace></div>
+
+      <ion-button color="primary" class="ion-button-class" shape="round" fill="solid" size="default" expand="block"
+        (click)="Login()">LOGIN</ion-button>
+      <ion-label class="ion-text-center">Não tem uma conta? <span class="link-button">Registrar</span>
+      </ion-label>
+
+    </form>
+
+  </div>
+  <!-- <h2 class="auth-title">
+    Welcome!
+    <br/>
+    Discover the new Ionic 4
+  </h2>
+  <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+    <ion-list class="inputs-list" lines="full">
+      <ion-item class="input-item">
+        <ion-input type="email" placeholder="Email" formControlName="email" clearInput autocapitalize="off" inputmode="email"></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message" *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item class="input-item">
+        <app-show-hide-password>
+          <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+        </app-show-hide-password>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+    </ion-list>
+
+    <ion-button class="login-btn" type="submit" expand="block" [disabled]="!loginForm.valid">Log In</ion-button>
+    <ion-row class="other-auth-options-row">
+      <ion-button class="forgot-btn" fill="clear" [routerLink]="['/auth/forgot-password']">
+        Forgot Password?
+      </ion-button>
+      <ion-button class="signup-btn" fill="clear" [routerLink]="['/auth/signup']">
+        Sign Up!
+      </ion-button>
+    </ion-row>
+  </form>
+
+  <div class="social-auth-options">
+    <p class="options-divider">Or</p>
+    <ion-button class="social-auth-btn facebook-auth-btn" expand="block" color="facebook" (click)="doFacebookLogin()">Log In with Facebook</ion-button>
+    <ion-button class="social-auth-btn google-auth-btn" expand="block" color="google" (click)="doGoogleLogin()">Log In with Google</ion-button>
+    <ion-button class="social-auth-btn twitter-auth-btn" expand="block" color="twitter" (click)="doTwitterLogin()">Log In with Twitter</ion-button>
+  </div> -->
 
 </ion-content>
