@@ -1,9 +1,90 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
+<ion-header no-border>
+  <!-- <ion-toolbar>
+    
+  </ion-toolbar> -->
+  <div class="login-header ion-padding" [hidden]="keyboard.isVisible">
+    <!-- <ion-buttons slot="start">
+      <ion-back-button icon="md-arrow-round-back" defaultHref="/login"></ion-back-button>
+    </ion-buttons> -->
+    <img class="logo-img" src="assets/img/graduation2.svg">
+
+    <h3>App de Recordações</h3>
+  </div>
 </ion-header>
 
 <ion-content>
+  <div class="center">
 
+    <div heading-column-lr>
+      <h2 class="headings" small-heading><ion-button size="small" [routerLink]="['/login']">Login</ion-button></h2>
+      <h1 class="headings" big-heading> Registrar</h1>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
+
+      <ion-item>
+        <ion-icon name="contact"></ion-icon>
+          <ion-input type="text" placeholder="Nome" formControlName="name"></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validation_messages.name">
+          <div class="error-message"
+            *ngIf="registerForm.get('name').hasError(validation.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
+            <ion-icon name="information-circle-outline"> </ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-icon name="at"></ion-icon>
+        <ion-input type="email" placeholder="Email" formControlName="email" clearInput autocapitalize="off"
+          inputmode="email" [ngClass]="{'is-invalid': 
+          (registerForm.get('email').touched ||
+            registerForm.get('email').dirty) &&
+             !registerForm.get('email').valid }"></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message"
+            *ngIf="registerForm.get('email').hasError(validation.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-icon name="key"></ion-icon>
+        <app-show-hide-password>
+
+          <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+          <ion-icon class="icon-eye" name="eye"></ion-icon>
+        </app-show-hide-password>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message"
+            *ngIf="registerForm.get('password').hasError(validation.type) && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+            <ion-icon name="information-circle-outline"> </ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- <ion-label class="forget-password">Recuperar a Senha</ion-label> -->
+
+      <div linespace></div>
+
+      <ion-button color="primary" class="ion-button-class" shape="round" fill="solid" size="default" expand="block"
+        (click)="doRegister()" [disabled]="!registerForm.valid">Registrar</ion-button>
+      <ion-label class="ion-text-center">Ou registre com uma rede social abaixo:</ion-label>
+
+      <ion-button><ion-icon name="logo-facebook" large></ion-icon></ion-button>
+      <ion-button><ion-icon name="logo-google" large></ion-icon></ion-button>
+      <!-- <ion-icon name="logo-facebook"></ion-icon><ion-icon name="logo-google"></ion-icon> -->
+
+    </form>
+
+  </div>
 </ion-content>

@@ -1,0 +1,143 @@
+ion-content {
+    --background: #fafafa;
+  }
+  
+  .login-header {
+    background: var(--ion-color-primary);
+  }
+  
+  h3 {
+    display: block;
+    text-align: center;
+    font-family: "Heebo-Bold" !important;
+    font-size: 25px !important;
+    color: white;
+  }
+  
+  .login-header {
+    position: relative;
+    background: var(--ion-color-primary);
+    border-radius: 0em;
+  }
+  
+  .login-header:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 15%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: var(--ion-color-primary);
+    border-bottom: 0;
+    margin-left: -15px;
+    margin-bottom: -15px;
+  }
+  
+  .logo-img {
+    display: block;
+    width: 120px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  [big-heading] {
+    font-family: "Heebo-Bold" !important;
+    font-size: 30px !important;
+    margin-left: auto;
+    padding-right: 25px;
+    color: var(--theme-black);
+  }
+  
+  [small-heading] {
+    font-family: "Heebo-Regular" !important;
+    // margin-left: auto;
+    padding-right: 40px;
+    font-size: 15px;
+  }
+  
+  [heading-column-lr] {
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  
+  .headings {
+    padding-left: 10px;
+  }
+  
+  ion-label {
+    color: #000;
+    opacity: 0.8;
+    font-size: 13px;
+    display: block;
+  }
+  
+  // [transparent]{
+  //   --background: transparent;
+  // }
+  
+  ion-icon {
+    padding-left: 10px !important;
+    padding-right: 5px !important;
+  }
+  
+  ion-input {
+    --color: #000;
+    --padding-bottom: 15px;
+    --padding-top: 15px;
+    --padding-start: 5px;
+    font-size: 15px;
+    text-indent: 1px;
+    padding-left: 10px !important;
+  }
+  
+  .icon-eye{
+    color: gray;
+  }
+  
+  [icon-small] {
+    width: 30px;
+  }
+  
+  .error-container {
+    .error-message {
+      display: flex;
+      align-items: center;
+      color: var(--ion-color-danger);
+      font-size: 14px;
+      ion-icon {
+        padding-left: 15px !important;
+        padding-right: 5px !important;
+      }
+    }
+  }
+  
+  
+  ion-item {
+    --highlight-color-focused: transparent;
+    --highlight-height: 0;
+    --highlight-color-invalid: #000;
+    --highlight-color-valid: #ddd;
+    --min-height: 65px;
+    --padding-start: 0;
+  }
+  
+  [linespace] {
+    height: 30px;
+  }
+  
+  ion-label {
+    color: #000;
+    opacity: 0.8;
+    font-size: 13px;
+    display: block;
+  }
+  .forget-password {
+    color: #000;
+    font-size: 13px;
+    display: block;
+    text-align: right;
+    padding: 10px;
+  }
+  

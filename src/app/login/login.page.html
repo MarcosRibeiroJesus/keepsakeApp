@@ -14,7 +14,7 @@
   <div class="center">
     <div heading-column-lr>
       <h1 class="headings" big-heading>Login</h1>
-      <h2 class="headings" small-heading> <ion-button size="small">Registrar</ion-button></h2>
+      <h2 class="headings" small-heading> <ion-button size="small" [routerLink]="['/register']">Registrar</ion-button></h2>
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
