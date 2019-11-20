@@ -17,10 +17,10 @@
 
     <div heading-column-lr>
       <h2 class="headings" small-heading><ion-button size="small" [routerLink]="['/login']">Login</ion-button></h2>
-      <h1 class="headings" big-heading> Registrar</h1>
+      <h1 class="headings" big-heading> Registro</h1>
     </div>
 
-    <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
+    <form [formGroup]="registerForm" (ngSubmit)="doRegister(registerForm)">
 
       <ion-item>
         <ion-icon name="contact"></ion-icon>
@@ -77,7 +77,7 @@
       <div linespace></div>
 
       <ion-button color="primary" class="ion-button-class" shape="round" fill="solid" size="default" expand="block"
-        (click)="doRegister()" [disabled]="!registerForm.valid">Registrar</ion-button>
+        (click)="doRegister(registerForm)" [disabled]="!registerForm.valid">Registrar</ion-button>
       <ion-label class="ion-text-center">Ou registre com uma rede social abaixo:</ion-label>
 
       <ion-button><ion-icon name="logo-facebook" large></ion-icon></ion-button>

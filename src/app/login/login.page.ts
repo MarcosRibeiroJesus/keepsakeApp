@@ -48,9 +48,33 @@ export class LoginPage implements OnInit {
     ]
   };
 
-  doLogin(): void {
-    console.log('do Log In');
-    this.router.navigate(['app/categories']);
+  async doLogin(loginForm: FormGroup): Promise<void> {
+    if (!loginForm.valid) {
+      console.log('Form is not valid yet, current value:', loginForm.value);
+    } else {
+      this.loading = await this.loadingCtrl.create();
+      await this.loading.present();
+
+      const email = loginForm.value.email;
+      const password = loginForm.value.password;
+
+      this.auth.loginUser(email, password).then(
+        () => {
+          this.loading.dismiss().then(() => {
+            this.router.navigateByUrl('tabs');
+          });
+        },
+        error => {
+          this.loading.dismiss().then(async () => {
+            const alert = await this.alertCtrl.create({
+              message: error.message,
+              buttons: [{ text: 'Ok', role: 'cancel' }],
+            });
+            await alert.present();
+          });
+        }
+      );
+    }
   }
 
   goToForgotPassword(): void {

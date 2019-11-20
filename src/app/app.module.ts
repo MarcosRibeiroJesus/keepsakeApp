@@ -16,7 +16,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -27,51 +27,51 @@ import { File } from '@ionic-native/file/ngx';
 // currently there is a bug while building the app with --prod
 // - https://github.com/RaphaelJenni/FirebaseUI-Angular/issues/76
 // the plugin exposes the two libraries as well. You can use those:
-import {FirebaseUIModule, firebase, firebaseui} from 'firebaseui-angular';
+import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
 import { IonicStorageModule } from '@ionic/storage';
 
-import {AngularFireModule} from '@angular/fire';
-import {AngularFireStorageModule} from '@angular/fire/storage';
-import {AngularFireAuthModule} from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 // import ngx-translate and the http loader
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TabsPageModule } from './tabs/tabs.module';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
-    signInOptions: [
-      {
-        provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        scopes: [
-          'openid', 
-          'https://www.googleapis.com/auth/userinfo.email', 
-          'https://www.googleapis.com/auth/userinfo.profile'
-        ],
-        customParameters: {
-          // Forces account selection even when one account
-          // is available.
-          prompt: 'select_account'
-        }
-      },
-      {
-        provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        scopes: [
-          'public_profile',
-          'email',
-          'user_likes',
-          'user_friends'
-        ],
-        customParameters: {
-          // Forces password re-entry.
-          'auth_type': 'reauthenticate'
-        }
-      },
-      firebase.auth.TwitterAuthProvider.PROVIDER_ID, // Twitter does not support scopes.
-      firebase.auth.EmailAuthProvider.PROVIDER_ID // Other providers don't need to be given as object.
-    ]
-  };
+  signInOptions: [
+    {
+      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      scopes: [
+        'openid',
+        'https://www.googleapis.com/auth/userinfo.email',
+        'https://www.googleapis.com/auth/userinfo.profile'
+      ],
+      customParameters: {
+        // Forces account selection even when one account
+        // is available.
+        prompt: 'select_account'
+      }
+    },
+    {
+      provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      scopes: [
+        'public_profile',
+        'email',
+        'user_likes',
+        'user_friends'
+      ],
+      customParameters: {
+        // Forces password re-entry.
+        'auth_type': 'reauthenticate'
+      }
+    },
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID, // Twitter does not support scopes.
+    firebase.auth.EmailAuthProvider.PROVIDER_ID // Other providers don't need to be given as object.
+  ]
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -90,7 +90,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         deps: [HttpClient]
       }
     }),
-    IonicStorageModule.forRoot(), 
+    IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -99,6 +99,13 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireStorageModule,
     HttpClientModule,
     TabsPageModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     StatusBar,

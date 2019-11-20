@@ -17,7 +17,7 @@
       <h2 class="headings" small-heading> <ion-button size="small" [routerLink]="['/register']">Registrar</ion-button></h2>
     </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+    <form [formGroup]="loginForm" (ngSubmit)="doLogin(loginForm)">
 
       <ion-item>
         <ion-icon name="contact"></ion-icon>
@@ -60,7 +60,7 @@
       <div linespace></div>
 
       <ion-button color="primary" class="ion-button-class" shape="round" fill="solid" size="default" expand="block"
-        (click)="Login()">LOGIN</ion-button>
+        (click)="doLogin(loginForm)" [disabled]="!loginForm.valid">LOGIN</ion-button>
       <ion-label class="ion-text-center">Não tem uma conta? <span class="link-button">Registrar</span>
       </ion-label>
 

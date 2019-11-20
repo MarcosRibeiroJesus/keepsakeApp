@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthGuard } from '../commons/auth.guard';
 
 const routes: Routes = [
   {
@@ -43,7 +44,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../home/home.module').then(m => m.HomePageModule)
+              import('../home/home.module').then(m => m.HomePageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -53,7 +55,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../fanpage/fanpage.module').then(m => m.FanpagePageModule)
+              import('../fanpage/fanpage.module').then(m => m.FanpagePageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -63,7 +66,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../message/message.module').then(m => m.MessagePageModule)
+              import('../message/message.module').then(m => m.MessagePageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -73,7 +77,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../photos/photos.module').then(m => m.PhotosPageModule)
+              import('../photos/photos.module').then(m => m.PhotosPageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -83,7 +88,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../users/users.module').then(m => m.UsersPageModule)
+              import('../users/users.module').then(m => m.UsersPageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -93,7 +99,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../profile/profile.module').then(m => m.ProfilePageModule)
+              import('../profile/profile.module').then(m => m.ProfilePageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },

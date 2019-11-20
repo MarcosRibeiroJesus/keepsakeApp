@@ -61,6 +61,35 @@ export class RegisterPage implements OnInit {
     this.router.navigate(['/tabs/home']);
   }
 
+  async doRegister(registerForm: FormGroup): Promise<void> {
+    if (!registerForm.valid) {
+      console.log('Need to complete the form, current value: ', registerForm.value);
+    } else {
+      const name: string = registerForm.value.name;
+      const email: string = registerForm.value.email; 
+      const password: string = registerForm.value.password;
+
+      this.auth.signupUser(email, password, name).then(
+        () => {
+          this.loading.dismiss().then(() => {
+            this.router.navigateByUrl('tabs');
+          });
+        },
+        error => {
+          this.loading.dismiss().then(async () => {
+            const alert = await this.alertCtrl.create({
+              message: error.message,
+              buttons: [{ text: 'Ok', role: 'Cancelar' }],
+            });
+            await alert.present();
+          });
+        }
+      );
+      this.loading = await this.loadingCtrl.create();
+      await this.loading.present();
+    }
+  }
+
   goToForgotPassword(): void {
     console.log('redirect to forgot-password page');
   }

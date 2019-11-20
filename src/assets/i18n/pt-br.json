@@ -38,7 +38,7 @@
 	"Senha": "Senha",
 	"Spanish": "Espanhol",
 	"Timeline": "Timeline",
-	"emailEmUso": "",
+	"emailEmUso": "Este email já foi cadastrado.",
 	"senhaOuUsuarioIncorreto": "A senha é inválida ou o usuário não possui uma senha.",
 	"usuarioInexistente": "Não há registro de usuário correspondente a esse identificador. O usuário pode ter sido excluído."
 }
