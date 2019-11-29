@@ -1,0 +1,31 @@
+ion-content {
+   
+    ion-card {
+      // margin-top: 40px;
+      border-radius: 28px;
+      text-align: left;
+      // --color: #fff;
+  
+      ion-card-header {
+        ion-card-subtitle {
+          // --color: #fff;
+        }
+        ion-card-title {
+          // --color: #fff;
+        }
+      }
+  
+      ion-card-content {
+        ion-button {
+          --color: #222;
+          --box-shadow: none;
+        }
+      }
+    }
+  }
+
+  .post-text {
+    white-space: pre-wrap;
+  }
+  
+  

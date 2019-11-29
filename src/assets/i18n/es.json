@@ -25,6 +25,7 @@
 	"Gifts": "Regalos",
 	"Lista de Presentes": "Lista de Regalos",
 	"Login": "Login",
+	"Mapa da Festa": "Mapa de Fiesta",
 	"Meu Book de 15 anos": "Mi libro de 15 años",
 	"Minha História": "Mi Historia",
 	"Neon": "Neon",
@@ -40,5 +41,7 @@
 	"Timeline": "Linea del tiempo",
 	"emailEmUso": "La dirección de correo electrónico ya está en uso por otra cuenta.",
 	"senhaOuUsuarioIncorreto": "La contraseña no es válida o el usuario no tiene una contraseña.",
+	"updateNameCancelButton": "Cancelar",
+	"updateNameSubHeader": "Nombre de actualización",
 	"usuarioInexistente": "No hay registro de usuario correspondiente a este identificador. El usuario puede haber sido eliminado."
 }

@@ -1,26 +1,31 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './commons/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadChildren: "./pages/login/login.module#LoginPageModule",
+    canActivate: [LoginGuard]
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule), 
-    canActivate: [AuthGuard]
+    loadChildren: "./pages/tabs/tabs.module#TabsPageModule",
   },
-  { path: 'photos', loadChildren: () => import('./photos/photos.module').then(m => m.PhotosPageModule), canActivate: [AuthGuard] },
-  { path: 'fanpage', loadChildren: () => import('./fanpage/fanpage.module').then(m => m.FanpagePageModule), canActivate: [AuthGuard] },
-  { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule), canActivate: [AuthGuard] },
-  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersPageModule), canActivate: [AuthGuard] },
-  { path: 'message', loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule), canActivate: [AuthGuard] },
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule), canActivate: [AuthGuard] },
-  { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)},
-  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) },
-  { path: 'reset-password', loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordPageModule) }
+  { path: 'photos', loadChildren: "./pages/photos/photos.module#PhotosPageModule", canActivate: [AuthGuard] },
+  { path: 'fanpage', loadChildren: "./pages/fanpage/fanpage.module#FanpagePageModule", canActivate: [AuthGuard] },
+  { path: 'profile', loadChildren: "./pages/profile/profile.module#ProfilePageModule", canActivate: [AuthGuard] },
+  { path: 'users', loadChildren: "./pages/users/users.module#UsersPageModule", canActivate: [AuthGuard] },
+  { path: 'message', loadChildren: "./pages/message/message.module#MessagePageModule" },
+  { path: 'message/:id', loadChildren: "./pages/message/message.module#MessagePageModule", canActivate: [AuthGuard] },
+  { path: 'home', loadChildren: "./pages/home/home.module#HomePageModule", canActivate: [AuthGuard] },
+  { path: 'register', loadChildren: "./pages/register/register.module#RegisterPageModule" },
+  { path: 'login', loadChildren: "./pages/login/login.module#LoginPageModule", canActivate: [LoginGuard] },
+  { path: 'reset-password', loadChildren: "./pages/reset-password/reset-password.module#ResetPasswordPageModule" },
+  { path: 'messages', loadChildren: './pages/message/messages.module#MessagesPageModule', canActivate: [AuthGuard] },
+  { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule', canActivate: [AuthGuard] },
+  { path: 'comments/:id', loadChildren: './pages/message/comments.module#CommentsPageModule', canActivate: [AuthGuard] }
 ];
 @NgModule({
   imports: [
@@ -28,4 +33,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

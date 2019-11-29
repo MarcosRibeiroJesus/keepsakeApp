@@ -57,7 +57,7 @@ export class AuthService {
   signupUser(
     email: string,
     password: string,
-    firstName: string
+    name: string
   ): Promise<void> {
     return firebase
       .auth()
@@ -66,7 +66,7 @@ export class AuthService {
         firebase
           .firestore()
           .doc(`/userProfile/${newUserCredential.user.uid}`)
-          .set({ email, firstName });
+          .set({ email, name });
       })
       .catch(error => {
         console.error(error.code);

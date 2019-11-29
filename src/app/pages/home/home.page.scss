@@ -1,0 +1,28 @@
+ion-content {
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+
+  ion-card {
+    // margin-top: 40px;
+    border-radius: 28px;
+    text-align: left;
+    // --color: #fff;
+
+    ion-card-header {
+      padding-bottom: 0px;
+
+      ion-card-subtitle {
+        // --color: #fff;
+      }
+      ion-card-title {
+        // --color: #fff;
+      }
+    }
+
+    ion-card-content {
+      ion-button {
+        --color: #222;
+        --box-shadow: none;
+      }
+    }
+  }
+}

@@ -25,6 +25,7 @@
 	"Gifts": "Gifts",
 	"Lista de Presentes": "Gifts list",
 	"Login": "Login",
+	"Mapa da Festa": "Party Map",
 	"Meu Book de 15 anos": "My 15 year Book",
 	"Minha História": "My Story",
 	"Neon": "Neon",
@@ -40,5 +41,7 @@
 	"Timeline": "Timeline",
 	"emailEmUso": "The email address is already in use by another account.",
 	"senhaOuUsuarioIncorreto": "The password is invalid or the user does not have a password.",
+	"updateNameCancelButton": "Cancel",
+	"updateNameSubHeader": "Update Name",
 	"usuarioInexistente": "There is no user record corresponding to this identifier. The user may have been deleted."
 }

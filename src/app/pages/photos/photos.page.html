@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fotos do Evento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="!fotos.length">
+    <ion-skeleton-text animated style="height: 180px"></ion-skeleton-text>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      </ion-card-subtitle>
+      <ion-card-title>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="!fotos.length">
+    <ion-skeleton-text animated style="height: 180px"></ion-skeleton-text>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+      </ion-card-subtitle>
+      <ion-card-title>
+        <ion-skeleton-text animated style="width: 55%"></ion-skeleton-text>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngFor="let item of fotos">
+    <img *ngIf="item.foto" src="{{ item.foto }}" />
+    <!-- <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+    <ion-card-header>
+          
+      <ion-card-subtitle>{{ item.data | date: 'dd/MM/yyyy HH:mm:ss' }}</ion-card-subtitle>
+      <ion-card-title>{{item.nomeUsuario}}</ion-card-title>
+    </ion-card-header> -->
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          {{item.nomeUsuario}}
+        </h3>
+        <p>
+          {{ item.data | date: 'dd/MM/yyyy HH:mm:ss' }}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-item style="display: none">
+    <input type="file" id="imagens" (change)="onChange($event)" accept=".jpg, .png" />
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentActionSheet()" color="light">
+      <ion-icon name="photos"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

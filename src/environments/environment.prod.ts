@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  deviceNative: true,
   firebase: {
     apiKey: "AIzaSyCcAN4evBGtXxFQsUUlI3SZP2z4hsPl21U",
     authDomain: "keepsakeapp-a3852.firebaseapp.com",

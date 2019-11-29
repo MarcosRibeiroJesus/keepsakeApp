@@ -1,0 +1,68 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/messages"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Comentários</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-img [src]="depoimento.foto"></ion-img>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-note>{{ depoimento.data | date: "dd/MM/yyyy HH:mm" }}</ion-note>
+        <h4 style="color: black; margin: 0">{{ depoimento.nomeUsuario }}</h4>
+        <p>{{ depoimento.depoimento }}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-around">
+      <ion-col>
+        <ion-button (click)="addLike()" expand="block" fill="clear">
+          <ion-icon slot="start" src="assets/icon/clapping.svg"></ion-icon>
+          <ion-badge color="danger">{{ depoimento.likes }}</ion-badge>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" fill="clear" (click)="shareAll()">
+          <ion-icon slot="icon-only" name="share-alt"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item *ngFor="let comment of depoimento.comments; let i = index">
+      <ion-avatar slot="start">
+        <img [src]="comment.photoURL">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{comment.firstName}}</h2>
+        <p>{{comment.comment}}</p>
+      </ion-label>
+      <!-- <ion-buttons slot="end" (click)="presentActionSheet(user)">
+        <ion-icon name="more"></ion-icon>
+      </ion-buttons> -->
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer >
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10" class="input-col">
+        <ion-input autocomplete="true" spellcheck="true" [(ngModel)]="messageText" type="text" placeholder="Entre na conversa" name="message"></ion-input>
+      </ion-col>
+      <ion-col size="2" class="send-col">
+        <ion-button shape="full" (click)="salvarDepoimento()">
+          <ion-icon name="paper-plane"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

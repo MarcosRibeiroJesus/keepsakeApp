@@ -36,6 +36,59 @@ export class FirebaseService {
     return null;
   }
 
+// Native
+uploadPhoto(
+  file: string,
+  filename: string,
+  uploadTypeEnum: UploadTypeEnum
+): Promise<any> {
+  try {
+    var storage = firebase.app().storage();
+    console.log(storage);
+
+    var storageRef = storage.ref();
+    var uploadTask = storageRef.child(
+      uploadTypeEnum.toString() + filename + ".png"
+    );
+
+    // Create file metadata to update
+    // var metadata = {
+    //   contentType: "image/png"
+    // };
+
+    return new Promise<any>((resolve, reject) => {
+      return uploadTask
+        .putString(file, 'data_url')
+        .then(() => {
+          return uploadTask.getDownloadURL().then(url => {
+            console.log("url");
+            console.log(url);
+            resolve({
+              url: url,
+              urlSafe: this._sanitizer.bypassSecurityTrustResourceUrl(url)
+            });
+          });
+        })
+        .catch(err => {
+          console.log(
+            "Ocorreu algum erro ao enviar o arquivo para o Firebase Google"
+          );
+          console.log(JSON.stringify(err));
+          reject(err);
+        });
+    });
+
+    // return uploadTask.put(file, metadata);
+    // put(file).then(function (snapshot) {
+    //     console.log('Uploaded a raw string!');
+    // });
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+}
+
+  // PWA
   uploadImage(
     file: File,
     filename: string,

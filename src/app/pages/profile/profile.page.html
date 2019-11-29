@@ -1,0 +1,137 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title>{{userProfile?.firstName}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon style=" color: red !important " slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="biblioteca()">
+          <ion-fab-button size="small" color="light">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+    <img *ngIf="!userProfile?.photoURL" class="no-photo" src="./assets/img/graduates.svg" />
+    <img *ngIf="userProfile?.photoURL" class="no-photo" [src]="userProfile?.photoURL" />
+
+    <!-- <ion-card-content>
+      <ion-card-title text-center>
+        {{ userProfile?.firstName }}
+      </ion-card-title>
+      <p text-center>{{ userProfile?.email }}</p>
+    </ion-card-content>  -->
+  </ion-card>
+
+  <!-- <ion-item>
+    <ion-label>
+      <ion-label class="dob-label">Aniversário</ion-label>
+      <ion-datetime
+        displayFormat="DD/MM"
+        pickerFormat="DD MM YYYY"
+        [(ngModel)]="birthDate"
+        (ionChange)="updateDOB(birthDate)"
+      >
+      </ion-datetime>
+    </ion-label>
+  </ion-item> -->
+
+  <ion-item (click)="updateName()">
+    <ion-label>
+      <ion-label class="text-left" size="5" translate>Nome</ion-label>
+
+      <ion-input
+        class="text-center"
+        size="7"
+        *ngIf="userProfile?.firstName"
+        onChange="this.updateName()"
+      >
+        {{ userProfile?.firstName }}
+      </ion-input>
+      <ion-input
+        size="7"
+        class="placeholder-profile text-center"
+        *ngIf="!userProfile?.firstName"
+      >
+        <span translate> ClickToModify </span>
+      </ion-input>
+    </ion-label>
+  </ion-item>
+
+  <ion-item (click)="updateEmail()">
+    <ion-label>
+      <ion-label class="text-left" size="5" translate>Email</ion-label>
+      <ion-input class="text-center" size="7" *ngIf="userProfile?.email">
+        {{ userProfile?.email }}
+      </ion-input>
+      <ion-input
+        size="7"
+        class="placeholder-profile text-center"
+        *ngIf="!userProfile?.email"
+      >
+        <span translate> ClickToModify </span>
+      </ion-input>
+    </ion-label>
+  </ion-item>
+
+  <!-- <ion-item (click)="updatePassword()">
+    <ion-label>
+      <ion-label class="text-left" size="5" translate>PasswordLabel</ion-label>
+      <ion-input placeholder=" {{ ('ClickToModify' | translate) }} " text-center> </ion-input>
+    </ion-label>
+  </ion-item> -->
+
+  <p text-center translate>Mapa do Evento</p>
+
+  <ion-button expand="block" color="warning" href="https://www.google.com/maps/place/Faculdade+Fortium/@-15.8005995,-47.8832681,15z/data=!4m5!3m4!1s0x0:0x36fc959aebd94b88!8m2!3d-15.8005995!4d-47.8832681"
+    >Fortium SBS</ion-button
+  >
+
+  <p text-center translate>ChooseTheme</p>
+
+  <ion-button expand="block" color="medium" (click)="changeTheme('autumn')"
+    >{{'Autumn' | translate}}</ion-button
+  >
+  <ion-button expand="block" color="medium" (click)="changeTheme('night')"
+    >{{'Dark' | translate}}</ion-button
+  >
+  <ion-button expand="block" color="medium" (click)="changeTheme('neon')"
+    >{{'Neon' | translate}}</ion-button
+  >
+  <ion-button expand="block" color="medium" (click)="changeTheme('')"
+    >{{'Default' | translate}}</ion-button
+  >
+  <hr />
+
+  <p text-center translate>Escolha seu idioma favorito:</p>
+
+  <ion-button expand="block" [color]="selectedLanguage === 'pt-br' ? 'success' : 'medium'" (click)="switchLanguage('pt-br')"
+    >{{'Portuguese' | translate}}</ion-button
+  >
+  <ion-button expand="block" [color]="selectedLanguage === 'en' ? 'danger' : 'medium'" (click)="switchLanguage('en')"
+    >{{'English' | translate}}</ion-button
+  >
+  <ion-button expand="block" [color]="selectedLanguage === 'es' ? 'warning' : 'medium'" (click)="switchLanguage('es')"
+    >{{'Spanish' | translate}}</ion-button
+  >
+  <!-- <ion-button color="primary">Primary</ion-button>
+  <ion-button color="secondary">Secondary</ion-button>
+  <ion-button color="tertiary">Tertiary</ion-button>
+  <ion-button color="medium">Medium</ion-button>
+  <ion-button color="dark">Dark</ion-button> -->
+
+  <!-- <ion-button color="primary" class="foo">Foo</ion-button> -->
+
+  <!-- <hr>
+
+  <ion-checkbox color="primary" checked></ion-checkbox>
+  <ion-checkbox color="secondary"></ion-checkbox>
+  <ion-checkbox color="danger" checked></ion-checkbox>
+  <ion-checkbox color="dark" checked></ion-checkbox>
+  <hr> -->
+</ion-content>
+

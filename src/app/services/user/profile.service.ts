@@ -2,29 +2,58 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
+import { User, UserProfile } from '../../interfaces/user';
+import { AuthService } from '../auth/auth.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  public userProfile: firebase.firestore.DocumentReference;
-  public currentUser: firebase.User;
+  private userProfile: AngularFirestoreDocument<UserProfile>;
+  private currentUser: firebase.User;
+  private usersCollection: AngularFirestoreCollection<UserProfile>;
 
-  constructor() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.currentUser = user;
-        this.userProfile = firebase.firestore().doc(`/userProfile/${user.uid}`);
-      }
-    });
+  constructor(
+    private afs: AngularFirestore,
+    private authService: AuthService
+  ) {
+    this.usersCollection = this.afs.collection<UserProfile>('userProfile');
   }
 
- getUserProfile(): firebase.firestore.DocumentReference {
-    return this.userProfile;
+  //  getUserProfile(): firebase.afs.DocumentReference {
+  //     return this.userProfile;
+  //   }
+
+  getUsers() {
+    return this.usersCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(users => {
+          const data = users.payload.doc.data();
+          const id = users.payload.doc.id;
+          console.log(data);
+
+          return { id, ...data };
+        });
+      })
+    );
   }
 
-  updateName(firstName: string, lastName: string): Promise<any> {
-    return this.userProfile.update({ firstName, lastName });
+  async getUserProfile(): Promise<Observable<UserProfile>> {
+    const user: firebase.User = await this.authService.getUser();
+    this.currentUser = user;
+    this.userProfile = this.afs.doc(`userProfile/${user.uid}`);
+    return this.userProfile.valueChanges();
+  }
+
+  updateName(firstName: string): Promise<any> {
+    return this.userProfile.update({ firstName });
   }
 
   updateDOB(birthDate: string): Promise<any> {

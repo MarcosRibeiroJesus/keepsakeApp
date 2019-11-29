@@ -1,0 +1,46 @@
+ion-content.background{
+    --background: url(../../../assets/img/sidemenu.jpg) 0 0/100% 100% no-repeat;
+}
+
+.date {
+  font-size: smaller;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 4px;
+  white-space: pre-wrap;
+}
+
+.incoming {
+  background: #FFFFFF;
+  color: black;
+}
+
+.sent {
+  background-color: #DCF8C6;
+  color: black;
+}
+
+.time {
+  color: rgba(59, 56, 56, 0.739);
+  float: right;
+  font-size: small;
+}
+
+.msg-input {
+    width: 100% !important;
+    // height: 100% !important;
+    // border: 1px solid var(--ion-color-medium);
+    border-radius: 10px;
+    background: #fff;
+    resize: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.msg-btn {
+    --padding-start: 0.5em ;
+    --padding-end: 0.5em;
+}

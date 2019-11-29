@@ -38,7 +38,7 @@ export class ThemeService {
 }
 
 const defaults = {
-  primary: '#C49564',
+  primary: '#ff4e00',
   secondary: '#0cd1e8',
   tertiary: '#7044ff',
   success: '#10dc60',

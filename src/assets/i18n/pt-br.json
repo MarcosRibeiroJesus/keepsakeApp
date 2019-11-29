@@ -25,6 +25,7 @@
 	"Gifts": "Gifts",
 	"Lista de Presentes": "Lista de Presentes",
 	"Login": "Login",
+	"Mapa da Festa": "Mapa da Festa",
 	"Meu Book de 15 anos": "Meu Book de 15 anos",
 	"Minha História": "Minha História",
 	"Neon": "Neon",
@@ -39,6 +40,8 @@
 	"Spanish": "Espanhol",
 	"Timeline": "Timeline",
 	"emailEmUso": "Este email já foi cadastrado.",
-	"senhaOuUsuarioIncorreto": "A senha é inválida ou o usuário não possui uma senha.",
-	"usuarioInexistente": "Não há registro de usuário correspondente a esse identificador. O usuário pode ter sido excluído."
+	"senhaOuUsuarioIncorreto": "Senha inválida. Tente novamente.",
+	"updateNameCancelButton": "Cancelar",
+	"updateNameSubHeader": "Atualizar Nome",
+	"usuarioInexistente": "Não há registro de usuário com este email."
 }

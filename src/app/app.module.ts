@@ -37,7 +37,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TabsPageModule } from './tabs/tabs.module';
+import { TabsPageModule } from './pages/tabs/tabs.module';
+
+import { Facebook } from '@ionic-native/facebook/ngx';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+import { Network } from '@ionic-native/network/ngx';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -97,6 +103,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,
+    AngularFireDatabaseModule,
     HttpClientModule,
     TabsPageModule,
     TranslateModule.forRoot({
@@ -108,13 +115,17 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     })
   ],
   providers: [
+    Facebook,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Keyboard,
     Camera,
     File,
-    FirebaseService
+    FirebaseService,
+    InAppBrowser,
+    SocialSharing,
+    Network
   ],
   bootstrap: [AppComponent]
 })
