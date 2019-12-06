@@ -4,6 +4,12 @@ export interface User {
     photoURL?: string;
     name?: string;
     birthday?: string;
+    firstName?: string;
+    birthDate?: string;
+    password?: string;
+    field?: string;
+    group?: string;
+    whatsappNumber?: string;
 }
 
 export class UserFireDataModel {

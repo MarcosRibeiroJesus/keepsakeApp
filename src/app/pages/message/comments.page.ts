@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Depoimento } from 'src/app/interfaces/depoimento';
-import { DepoimentoService } from 'src/app/services/depoimento/depoimento.service';
+import { EventPhoto } from 'src/app/interfaces/eventPhoto';
+import { EventPhotoService } from 'src/app/services/eventPhoto/eventPhoto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
@@ -19,7 +19,7 @@ import { PreviewService } from 'src/app/services/preview/preview.service';
 export class CommentsPage implements OnInit {
   public userProfile: UserProfile;
   private depoimentoId: string = null;
-  public depoimento: Depoimento = {};
+  public eventPhoto: EventPhoto = {};
   public comment: Comment = {};
   comments = [];
   messageText: any;
@@ -28,7 +28,7 @@ export class CommentsPage implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private depoimentoService: DepoimentoService,
+    private depoimentoService: EventPhotoService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private router: Router,
@@ -60,9 +60,9 @@ export class CommentsPage implements OnInit {
     this.depoimentoSubscription = this.depoimentoService
       .getDepoimento(this.depoimentoId)
       .subscribe(data => {
-        this.depoimento = data;
-        // this.comments = this.depoimento.comments;
-        console.log(this.depoimento.comments);
+        this.eventPhoto = data;
+        // this.comments = this.eventPhoto.comments;
+        console.log(this.eventPhoto.comments);
 
       });
   }
@@ -76,26 +76,28 @@ export class CommentsPage implements OnInit {
   }
 
   addLike() {
-    console.log(this.depoimento);
-    this.depoimento.likes++;
-    this.depoimentoService.aplauseDepoimento(this.depoimentoId, this.depoimento);
+    console.log(this.eventPhoto);
+    this.eventPhoto.likes++;
+    this.depoimentoService.aplauseDepoimento(this.depoimentoId, this.eventPhoto);
   }
 
   async salvarDepoimento() {
     this.presentLoading();
-    // this.depoimento.userId = this.authService.getAuth().currentUser.uid;
-    // this.depoimento.likes = 0;
+
+    if(!this.eventPhoto.comments) {
+      this.eventPhoto.comments = [];
+    }
 
     this.comment.comment = this.messageText,
-      this.comment.createdAt = new Date().getTime();
-    this.depoimento.comments.push(this.comment);
+    this.comment.createdAt = new Date().getTime();
+    this.eventPhoto.comments.push(this.comment);
     if (this.depoimentoId) {
       console.log('IF', this.comment);
 
       try {
         await this.depoimentoService.updateDepoimento(
           this.depoimentoId,
-          this.depoimento
+          this.eventPhoto
         );
         this.loading.dismiss();
         this.messageText = '';
@@ -110,7 +112,7 @@ export class CommentsPage implements OnInit {
       //   await this.depoimentoService.commentsDepoimento(
       //     this.depoimentoId,
       //     this.comment,
-      //     this.depoimento
+      //     this.eventPhoto
       //   );
       //   this.loading.dismiss();
       //   this.messageText = '';

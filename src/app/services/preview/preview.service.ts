@@ -1,4 +1,4 @@
-import { Depoimento } from '../../interfaces/depoimento';
+import { EventPhoto } from '../../interfaces/eventPhoto';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
@@ -8,10 +8,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PreviewService {
-  private previewCollection: AngularFirestoreCollection<Depoimento>;
+  private previewCollection: AngularFirestoreCollection<EventPhoto>;
 
   constructor(private afs: AngularFirestore) {
-    this.previewCollection = this.afs.collection<Depoimento>('Preview', ref => ref.orderBy('key', 'asc'));
+    this.previewCollection = this.afs.collection<EventPhoto>('Preview', ref => ref.orderBy('key', 'asc'));
   }
 
   getPreviews() {
@@ -35,11 +35,11 @@ export class PreviewService {
   //   this.afDB.list('Preview/').snapshotChanges(['child_added']).subscribe(actions => {
   //     this.preview = [];
   //     actions.forEach(action => {
-  //       console.log(action.payload.exportVal().depoimento);
+  //       console.log(action.payload.exportVal().eventPhoto);
   //       if (!action.payload.exportVal()[this.userProfile.uid]) {
   //         this.preview.push({
   //           key: action.key,
-  //           depoimento: action.payload.exportVal().depoimento,
+  //           eventPhoto: action.payload.exportVal().eventPhoto,
   //           foto: action.payload.exportVal().foto,
   //           likes: action.payload.exportVal().likes,
   //           location: action.payload.exportVal().location,
@@ -50,7 +50,7 @@ export class PreviewService {
   //       } else {
   //         this.preview.push({
   //           key: action.key,
-  //           depoimento: action.payload.exportVal().depoimento,
+  //           eventPhoto: action.payload.exportVal().eventPhoto,
   //           foto: action.payload.exportVal().foto,
   //           likes: action.payload.exportVal().likes,
   //           location: action.payload.exportVal().location,
@@ -63,20 +63,20 @@ export class PreviewService {
   //   });
   // }
 
-  addPreview(preview: Depoimento) {
+  addPreview(preview: EventPhoto) {
     return this.previewCollection.add(preview);
   }
 
   getPreviewID(id: string) {
-    return this.previewCollection.doc<Depoimento>(id).valueChanges();
+    return this.previewCollection.doc<EventPhoto>(id).valueChanges();
   }
 
-  updatePreview(id: string, preview: Depoimento) {
-    return this.previewCollection.doc<Depoimento>(id).update(preview);
+  updatePreview(id: string, preview: EventPhoto) {
+    return this.previewCollection.doc<EventPhoto>(id).update(preview);
   }
 
-  likePreview(id: string, preview: Depoimento, ) {
-    return this.previewCollection.doc<Depoimento>(id).update(preview);
+  likePreview(id: string, preview: EventPhoto, ) {
+    return this.previewCollection.doc<EventPhoto>(id).update(preview);
     // this.previewCollection.doc(id). collection(uid).add({ liked: true });
   }
 

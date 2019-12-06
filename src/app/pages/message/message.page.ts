@@ -8,8 +8,8 @@ import { File as FileNgx } from "@ionic-native/file/ngx";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { Platform } from "@ionic/angular";
 import { AuthService } from "../../services/auth/auth.service";
-import { DepoimentoService } from "../../services/depoimento/depoimento.service";
-import { Depoimento } from "../../interfaces/depoimento";
+import { EventPhotoService } from "../../services/eventPhoto/eventPhoto.service";
+import { EventPhoto } from "../../interfaces/eventPhoto";
 import { ActivatedRoute, Router } from "@angular/router";
 import {
   NavController,
@@ -30,7 +30,7 @@ import { UserProfile } from '../../interfaces/user';
 })
 export class MessagePage implements OnInit {
   private depoimentoId: string = null;
-  public depoimento: Depoimento = {};
+  public eventPhoto: EventPhoto = {};
   private loading: any;
   public userProfile: UserProfile;
   public uploadPercent: Observable<number>;
@@ -44,7 +44,7 @@ export class MessagePage implements OnInit {
   upload: any;
 
   constructor(
-    private depoimentoService: DepoimentoService,
+    private depoimentoService: EventPhotoService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
@@ -72,7 +72,7 @@ export class MessagePage implements OnInit {
       profile$.subscribe(userProfile => {
         if (!userProfile) this.router.navigate(['login']);
         this.userProfile = userProfile;
-        this.depoimento.nomeUsuario = userProfile.firstName;
+        this.eventPhoto.nomeUsuario = userProfile.firstName;
         console.log(this.userProfile);
       });
     });
@@ -88,7 +88,7 @@ export class MessagePage implements OnInit {
     this.depoimentoSubscription = this.depoimentoService
       .getDepoimento(this.depoimentoId)
       .subscribe(data => {
-        this.depoimento = data;
+        this.eventPhoto = data;
       });
   }
 
@@ -97,11 +97,11 @@ export class MessagePage implements OnInit {
     if (source === 'library') {
       console.log('library');
       const libraryImage = await this.openLibrary();
-      this.depoimento.foto = 'data:image/jpg;base64,' + libraryImage;
+      this.eventPhoto.foto = 'data:image/jpg;base64,' + libraryImage;
     } else {
       console.log('camera');
       const cameraImage = await this.openCamera();
-      this.depoimento.foto = 'data:image/jpg;base64,' + cameraImage;
+      this.eventPhoto.foto = 'data:image/jpg;base64,' + cameraImage;
     }
   }
 
@@ -137,11 +137,11 @@ export class MessagePage implements OnInit {
     this.presentLoading();
     let filename = "DEPOIMENTO_" + Date.now();
     await this.firebaseService
-      .uploadPhoto(this.depoimento.foto, filename, UploadTypeEnum.DEPOIMENTO)
+      .uploadPhoto(this.eventPhoto.foto, filename, UploadTypeEnum.DEPOIMENTO)
       .then(async (result: { url: string; urlSafe: string }) => {
         // const imagem = result.url;
         console.log(result.url);
-        this.depoimento.foto = result.url;
+        this.eventPhoto.foto = result.url;
       }).then(() => {
         this.salvarDepoimento();
       }).catch((Error) => {
@@ -154,28 +154,28 @@ export class MessagePage implements OnInit {
 
   async salvarDepoimento() {
 
-    this.depoimento.userId = this.authService.getAuth().currentUser.uid;
-    this.depoimento.likes = 0;
+    this.eventPhoto.userId = this.authService.getAuth().currentUser.uid;
+    this.eventPhoto.likes = 0;
     
     if (this.depoimentoId) {
       try {
         await this.depoimentoService.updateDepoimento(
           this.depoimentoId,
-          this.depoimento
+          this.eventPhoto
         );
         await this.loading.dismiss();
 
         this.navCtrl.navigateBack("/tabs/messages");
-        // this.depoimento = {}
+        // this.eventPhoto = {}
       } catch (error) {
         this.presentToast("Erro:", 'Erro ao atualizar!', 'danger');
         this.loading.dismiss();
       }
     } else {
-      this.depoimento.data = new Date().getTime();
+      this.eventPhoto.data = new Date().getTime();
 
       try {
-        await this.depoimentoService.addDepoimento(this.depoimento);
+        await this.depoimentoService.addDepoimento(this.eventPhoto);
         await this.loading.dismiss();
         this.navCtrl.navigateBack("/tabs/messages");
         this.presentToast("Sucesso:", 'Post enviado com sucesso!', 'success');
@@ -244,8 +244,8 @@ export class MessagePage implements OnInit {
       .pipe(
         finalize(() => {
           this.downloadUrl = ref.getDownloadURL();
-          this.depoimento.foto = this.downloadUrl.toString();
-          console.log('url foto depoimento finalize snapshot', this.depoimento.foto);
+          this.eventPhoto.foto = this.downloadUrl.toString();
+          console.log('url foto eventPhoto finalize snapshot', this.eventPhoto.foto);
 
         })
       )
@@ -292,8 +292,8 @@ export class MessagePage implements OnInit {
           .then((result: { url: string; urlSafe: string }) => {
             // const imagem = result.url;
             console.log(result.url);
-            this.depoimento.foto = result.url;
-            console.log('url foto depoimento onChanges', this.depoimento.foto);
+            this.eventPhoto.foto = result.url;
+            console.log('url foto eventPhoto onChanges', this.eventPhoto.foto);
             this.loading.dismiss();
           });
       }

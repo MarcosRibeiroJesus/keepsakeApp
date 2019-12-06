@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 import { Comment } from './comment';
 
-export interface Depoimento {
+export interface EventPhoto {
     id?: string;
     key?: string;
-    depoimento?: string;
+    eventPhoto?: string;
     foto?: string;
     likes?: number;
     liked?: boolean;
@@ -20,5 +20,5 @@ export interface Depoimentos {
     offset: number;
     limit: number;
     total?: number;
-    results: Observable<Depoimento>[];
+    results: Observable<EventPhoto>[];
    }

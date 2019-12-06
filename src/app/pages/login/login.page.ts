@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
   public loginForm: FormGroup;
   private loading: any;
   user: User = {};
-
+  subscription : any ;
   providerFb: firebase.auth.FacebookAuthProvider;
 
   constructor(
@@ -156,6 +156,8 @@ export class LoginPage implements OnInit {
         .credential(response.authResponse.accessToken);
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
+          this.presentToast(`Sucesso! = ${success}`)
+
           console.log('Info Facebook: ' + JSON.stringify(success));
           this.afDB.object('userProfile/' + success.user.uid).set({
             email: success.user.email,
@@ -164,8 +166,9 @@ export class LoginPage implements OnInit {
             uid: success.user.uid
           });
 
-          this.router.navigateByUrl('tabs');
+          this.router.navigate(['tabs']);
         }).catch((error) => {
+          this.presentToast(`Erro! = ${error}`)
           console.log('Erro: ' + JSON.stringify(error));
         });
     }).catch((error) => { console.log(error); });
@@ -183,9 +186,9 @@ export class LoginPage implements OnInit {
           uid: success.user.uid
         });
 
-        this.router.navigateByUrl('tabs');
+        this.router.navigate(['tabs']);
       }).catch((error) => {
-        console.log('Erreur: ' + JSON.stringify(error));
+        console.log('Error: ' + JSON.stringify(error));
       });
   }
 
@@ -228,5 +231,15 @@ export class LoginPage implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
+  }
+
+  ionViewDidEnter() {
+    this.subscription = this.platform.backButton.subscribe(() => {
+      navigator['app'].exitApp();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 }

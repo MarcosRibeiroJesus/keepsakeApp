@@ -20,8 +20,8 @@
 
       <ion-item>
         <ion-icon name="at"></ion-icon>
-        <ion-input type="email" placeholder="Email" formControlName="email" clearInput
-          autocapitalize="off" inputmode="email" [ngClass]="{'is-invalid': 
+        <ion-input type="email" placeholder="Email" formControlName="email" clearInput autocapitalize="off"
+          inputmode="email" [ngClass]="{'is-invalid': 
           (loginForm.get('email').touched ||
             loginForm.get('email').dirty) &&
              !loginForm.get('email').valid }"></ion-input>
@@ -60,17 +60,22 @@
 
       <ion-button color="primary" class="ion-button-class" shape="round" fill="solid" size="default" expand="block"
         (click)="login(loginForm)" [disabled]="!loginForm.valid">LOGIN</ion-button>
-      <ion-label class="ion-text-center">Não tem uma conta? <span class="link-button">Registrar</span>
-      </ion-label>
 
+    <!-- <ion-label class="ion-text-center">Não tem uma conta? <span class="link-button">Registrar</span>
+      </ion-label> -->
     </form>
 
-    <ion-button (click)="facebookLogin()">
+
+    <!-- <ion-label class="ion-text-center">Não tem uma conta? <span class="link-button">Registrar</span>
+      </ion-label> -->
+
+
+     <!--  <ion-button (click)="facebookLogin()">
       <ion-icon name="logo-facebook" large></ion-icon>
     </ion-button>
     <ion-button>
       <ion-icon name="logo-google" large></ion-icon>
-    </ion-button>
+    </ion-button> -->
 
   </div>
   <!-- <h2 class="auth-title">

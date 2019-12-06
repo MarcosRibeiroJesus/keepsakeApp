@@ -6,13 +6,40 @@
 
 <ion-content fullscreen>
 
+  <!-- fake -->
+  <ion-card *ngIf="!preview.length">
+    <ion-skeleton-text animated style="height: 180px"></ion-skeleton-text>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      </ion-card-subtitle>
+      <ion-card-title>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="!preview.length">
+    <ion-skeleton-text animated style="height: 180px"></ion-skeleton-text>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+      </ion-card-subtitle>
+      <ion-card-title>
+        <ion-skeleton-text animated style="width: 55%"></ion-skeleton-text>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <!-- end fake -->
+
+
   <ion-card *ngFor="let item of preview; let i = index">
     <img [src]="item.foto" />
     <ion-card-header>
       <ion-card-subtitle> {{item.subtitulo}} </ion-card-subtitle>
       <h4 style="color: black; margin: 0">{{ item.location }}</h4>
       <p>
-        {{item.depoimento}}
+        {{item.eventPhoto}}
       </p>
     </ion-card-header>
     <ion-grid>
@@ -23,7 +50,7 @@
             <ion-icon slot="start" src="assets/icon/clapping.svg"></ion-icon>
             <ion-badge color="danger">{{ item.likes }}</ion-badge>
           </ion-button>
-<!-- 
+          <!-- 
           <ion-button *ngIf="item.liked" (click)="removeLike(item)" expand="block" fill="clear">
             <ion-icon slot="start" color="danger" name="heart"></ion-icon>
             <ion-badge color="danger">{{ item.likes }}</ion-badge>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "692963994732",
+    "firebase_url": "https://keepsakeapp-a3852.firebaseio.com",
+    "project_id": "keepsakeapp-a3852",
+    "storage_bucket": "keepsakeapp-a3852.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692963994732:android:916780675dd6b0913e3c49",
+        "android_client_info": {
+          "package_name": "br.com.keepsake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692963994732-su00k43on78edscc4g6lmjcghciniucu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAdDaKRz2wp30F60Wh57XXdMfs_woc24Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692963994732-su00k43on78edscc4g6lmjcghciniucu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

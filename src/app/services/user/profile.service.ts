@@ -56,6 +56,18 @@ export class ProfileService {
     return this.userProfile.update({ firstName });
   }
 
+  updateGroup(group: string): Promise<any> {
+    return this.userProfile.update({ group });
+  }
+  
+  updateField(field: string): Promise<any> {
+    return this.userProfile.update({ field });
+  }
+
+  updateWhatsapp(whatsappNumber: string): Promise<any> {
+    return this.userProfile.update({ whatsappNumber });
+  }
+
   updateDOB(birthDate: string): Promise<any> {
     return this.userProfile.update({ birthDate });
   }

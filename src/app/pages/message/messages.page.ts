@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { Depoimento } from '../../interfaces/depoimento';
+import { EventPhoto } from '../../interfaces/eventPhoto';
 import { Subscription } from 'rxjs';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { DepoimentoService } from '../../services/depoimento/depoimento.service';
+import { EventPhotoService } from '../../services/eventPhoto/eventPhoto.service';
 import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
@@ -14,13 +14,13 @@ import { IonInfiniteScroll } from '@ionic/angular';
 export class MessagesPage implements OnInit {
   @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
   private loading: any;
-  public depoimentos = new Array<Depoimento>();
+  public depoimentos = new Array<EventPhoto>();
   private depoimentosSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private depoimentoService: DepoimentoService,
+    private depoimentoService: EventPhotoService,
     private toastCtrl: ToastController
   ) {
     this.depoimentosSubscription = this.depoimentoService
@@ -40,7 +40,7 @@ export class MessagesPage implements OnInit {
  
   }
 
-  addLike(post: Depoimento) {
+  addLike(post: EventPhoto) {
     console.log(post);
     post.likes++;
     this.depoimentoService.aplauseDepoimento(post.id, post);

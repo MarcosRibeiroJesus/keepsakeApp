@@ -9,14 +9,14 @@
 
 <ion-content>
 
-  <ion-img [src]="depoimento.foto"></ion-img>
+  <ion-img [src]="eventPhoto.foto"></ion-img>
 
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-note>{{ depoimento.data | date: "dd/MM/yyyy HH:mm" }}</ion-note>
-        <h4 style="color: black; margin: 0">{{ depoimento.nomeUsuario }}</h4>
-        <p>{{ depoimento.depoimento }}</p>
+        <ion-note>{{ eventPhoto.data | date: "dd/MM/yyyy HH:mm" }}</ion-note>
+        <h4 style="color: black; margin: 0">{{ eventPhoto.nomeUsuario }}</h4>
+        <p>{{ eventPhoto.eventPhoto }}</p>
       </ion-col>
     </ion-row>
 
@@ -24,7 +24,7 @@
       <ion-col>
         <ion-button (click)="addLike()" expand="block" fill="clear">
           <ion-icon slot="start" src="assets/icon/clapping.svg"></ion-icon>
-          <ion-badge color="danger">{{ depoimento.likes }}</ion-badge>
+          <ion-badge color="danger">{{ eventPhoto.likes }}</ion-badge>
         </ion-button>
       </ion-col>
       <ion-col>
@@ -36,7 +36,7 @@
   </ion-grid>
 
   <ion-list>
-    <ion-item *ngFor="let comment of depoimento.comments; let i = index">
+    <ion-item *ngFor="let comment of eventPhoto.comments; let i = index">
       <ion-avatar slot="start">
         <img [src]="comment.photoURL">
       </ion-avatar>

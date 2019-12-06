@@ -27,16 +27,16 @@ export class ChatService {
     );
   }
 
-  addDepoimento(depoimento: Chat) {
-    return this.chatsCollection.add(depoimento);
+  addDepoimento(eventPhoto: Chat) {
+    return this.chatsCollection.add(eventPhoto);
   }
 
   getDepoimento(id: string) {
     return this.chatsCollection.doc<Chat>(id).valueChanges();
   }
 
-  updateDepoimento(id: string, depoimento: Chat) {
-    return this.chatsCollection.doc<Chat>(id).update(depoimento);
+  updateDepoimento(id: string, eventPhoto: Chat) {
+    return this.chatsCollection.doc<Chat>(id).update(eventPhoto);
   }
 
   deleteDepoimento(id: string) {

@@ -1,6 +1,6 @@
 <!-- <ion-header>
   <ion-toolbar>
-    <ion-title>Depoimento </ion-title>
+    <ion-title>EventPhoto </ion-title>
   </ion-toolbar>
 </ion-header> -->
 
@@ -54,7 +54,7 @@
       <p>{{ item.data | date: "dd/MM/yyyy HH:mm:ss" }}</p>
     </ion-card-header>
     <ion-card-content>
-      <p>{{ item.depoimento }}</p>
+      <p>{{ item.eventPhoto }}</p>
     </ion-card-content>
   </ion-card> -->
 
@@ -64,7 +64,7 @@
 
       <ion-card-subtitle>{{ item.data | date: "dd/MM/yyyy HH:mm" }}</ion-card-subtitle>
       <h4 style="color: black; margin: 0">{{ item.nomeUsuario }}</h4>
-      <p>{{ item.depoimento }}</p>
+      <p>{{ item.eventPhoto }}</p>
     </ion-card-header>
     <ion-grid>
       <ion-row class="ion-justify-content-around">
@@ -78,7 +78,7 @@
         <ion-col>
           <ion-button expand="block" fill="clear" [routerLink]="['/comments', item.id]">
             <ion-icon slot="icon-only" name="text"></ion-icon>
-            <!-- <ion-badge color="danger">{{ item.comments.length }}</ion-badge> -->
+            <ion-badge color="danger">{{ item.comments?.length }}</ion-badge>
           </ion-button>
         </ion-col>
 

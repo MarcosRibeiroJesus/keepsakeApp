@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Depoimento } from 'src/app/interfaces/depoimento';
+import { EventPhoto } from 'src/app/interfaces/eventPhoto';
 
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, Platform } from '@ionic/angular';
 import { AuthService } from '../../services/auth/auth.service';
 import { ProfileService } from '../../services/user/profile.service';
 import { Router } from '@angular/router';
@@ -19,11 +19,11 @@ import { PreviewService } from 'src/app/services/preview/preview.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  preview: any
+  preview: any = [];
   public userProfile: UserProfile;
 
   private previewSubscription: Subscription;
-
+  subscription : any;
 
   constructor(
     private socialSharing: SocialSharing,
@@ -35,6 +35,7 @@ export class HomePage implements OnInit {
     private profileService: ProfileService,
     private previewService: PreviewService,
     private router: Router,
+    private platform: Platform
   ) {
     this.previewSubscription = this.previewService
       .getPreviews()
@@ -60,11 +61,11 @@ export class HomePage implements OnInit {
     this.afDB.list('Preview/').snapshotChanges(['child_added']).subscribe(actions => {
       this.preview = [];
       actions.forEach(action => {
-        console.log(action.payload.exportVal().depoimento);
+        console.log(action.payload.exportVal().eventPhoto);
         if (!action.payload.exportVal()[this.userProfile.uid]) {
           this.preview.push({
             key: action.key,
-            depoimento: action.payload.exportVal().depoimento,
+            eventPhoto: action.payload.exportVal().eventPhoto,
             foto: action.payload.exportVal().foto,
             likes: action.payload.exportVal().likes,
             location: action.payload.exportVal().location,
@@ -75,7 +76,7 @@ export class HomePage implements OnInit {
         } else {
           this.preview.push({
             key: action.key,
-            depoimento: action.payload.exportVal().depoimento,
+            eventPhoto: action.payload.exportVal().eventPhoto,
             foto: action.payload.exportVal().foto,
             likes: action.payload.exportVal().likes,
             location: action.payload.exportVal().location,
@@ -96,16 +97,26 @@ export class HomePage implements OnInit {
     })
   }
 
-  addLike(post: Depoimento) {
+  addLike(post: EventPhoto) {
     console.log(post);
     post.likes++;
     this.previewService.likePreview(post.id, post);
   }
 
-  removeLike(post: Depoimento) {
+  removeLike(post: EventPhoto) {
     post.likes--;
     post.liked = false;
     this.previewService.removeLikedPreview(post.key);
+  }
+
+  ionViewDidEnter() {
+    this.subscription = this.platform.backButton.subscribe(() => {
+      navigator['app'].exitApp();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 
 }

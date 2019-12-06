@@ -44,6 +44,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Network } from '@ionic-native/network/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -125,7 +126,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     FirebaseService,
     InAppBrowser,
     SocialSharing,
-    Network
+    Network,
+    OneSignal
   ],
   bootstrap: [AppComponent]
 })

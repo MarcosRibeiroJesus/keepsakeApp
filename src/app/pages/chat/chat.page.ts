@@ -66,6 +66,8 @@ export class ChatPage implements OnInit {
     });
   }
 
+
+
   IonViewDidEnter() {
     // this.presentLoading();
   }
@@ -84,7 +86,7 @@ export class ChatPage implements OnInit {
         if (!actions || actions.length <= 0) this.presentToast("Erro:", 'Erro ao atualizar!', 'danger');
 
         actions.forEach(action => {
-          console.log('Mensagem: ' + action.payload.exportVal().text);
+          // console.log('Mensagem: ' + action.payload.exportVal().text);
           this.messages.push({
             firstName: action.payload.exportVal().firstName,
             userId: action.payload.exportVal().userId,
@@ -100,7 +102,7 @@ export class ChatPage implements OnInit {
 
   sendMessage() {
 
-    if (this.connected === true) {
+    // if (this.connected === true) {
       this.afDB.list('chat/').push({
         firstName: this.userProfile.firstName,
         userId: this.userProfile.uid,
@@ -112,11 +114,9 @@ export class ChatPage implements OnInit {
       setTimeout(() => {
         this.content.scrollToBottom();
       });
-    } else {
-      this.presentToast('Você está Offline!', `Nenhuma Conexão Detectada.`, 'danger')
-    }
-
-
+    // } else {
+    //   this.presentToast('Você está Offline!', `Nenhuma Conexão Detectada.`, 'danger')
+    // }
 
   }
 

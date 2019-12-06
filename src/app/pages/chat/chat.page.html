@@ -31,7 +31,7 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer *ngIf="connected">
+<ion-footer>
   <!-- <ion-grid>
     <ion-row>
       <ion-col size="10" class="input-col">
@@ -53,7 +53,7 @@
           [(ngModel)]="messageText" type="text" placeholder="Sua mensagem..." name="message"></textarea>
       </ion-col>
       <ion-col size="2">
-        <ion-button expand="block" fill="clear" color="primary" [disabled]="messageText === ''" class="msg-btn"
+        <ion-button expand="block" fill="clear" color="primary" [disabled]="messageText === '' && connected === false" class="msg-btn"
           (click)="sendMessage()">
           <ion-icon name="paper-plane" slot="icon-only"></ion-icon>
         </ion-button>

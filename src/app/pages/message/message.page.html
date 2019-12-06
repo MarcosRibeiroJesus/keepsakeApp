@@ -3,40 +3,40 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs/messages"></ion-back-button>
     </ion-buttons>
-    <ion-title>Depoimento</ion-title>
+    <ion-title>Enviar Foto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
   <ion-item>
-    <ion-textarea rows="8" minlength="12" type="text" #textarea="ngModel" required [(ngModel)]="depoimento.depoimento"
-      placeholder="Seu depoimento...">
+    <ion-textarea rows="8" minlength="12" type="text" #textarea="ngModel" required [(ngModel)]="eventPhoto.eventPhoto"
+      placeholder="Sua mensagem...">
     </ion-textarea>
   </ion-item>
 
   <div *ngIf="textarea.invalid && (textarea.dirty || textarea.touched)" class="error-container">
     <div *ngIf="textarea.errors.required" class="error-message">
       <ion-icon name="information-circle-outline"> </ion-icon>
-      Um depoimento é obrigatório.
+      Uma mensagem é obrigatória.
     </div>
     <div *ngIf="textarea.errors.minlength" class="error-message">
       <ion-icon name="information-circle-outline"> </ion-icon>
-      O depoimento deve conter ao menos 12 caracteres.
+      A mensagem deve conter ao menos 12 caracteres.
     </div>
   </div>
 
   <ion-item style="display: none">
     <input type="file" id="imagensDepoimento" (change)="onChange($event)" accept=".jpg, .png" />
   </ion-item>
-  <ion-item *ngIf="depoimento.foto">
-    <ion-img [src]="depoimento.foto"></ion-img>
+  <ion-item *ngIf="eventPhoto.foto">
+    <ion-img [src]="eventPhoto.foto"></ion-img>
   </ion-item>
 
   <ion-footer>
     <ion-toolbar>
       <ion-button [disabled]="!textarea.valid" (click)="uploadFirebase()" expand="block">
-        Enviar Depoimento
+        Enviar Foto
       </ion-button>
     </ion-toolbar>
   </ion-footer>
@@ -47,26 +47,26 @@
   </ion-button> -->
 
   <!-- Native -->
-  <ion-fab *ngIf="!depoimento.foto" vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab *ngIf="!eventPhoto.foto" vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button color="light" (click)="addPhoto('camera')">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-fab *ngIf="!depoimento.foto" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab *ngIf="!eventPhoto.foto" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="light" (click)="addPhoto('library')">
       <ion-icon name="folder"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <!-- PWA -->
-  <!-- <ion-fab *ngIf="!depoimento.foto" vertical="bottom" horizontal="start" slot="fixed">
+  <!-- <ion-fab *ngIf="!eventPhoto.foto" vertical="bottom" horizontal="start" slot="fixed">
       <ion-fab-button color="light" (click)="abrirGaleria()">
         <ion-icon name="logo-instagram"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   
-    <ion-fab *ngIf="!depoimento.foto" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab *ngIf="!eventPhoto.foto" vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button color="light" (click)="openFileBrowser($event, 'imagensDepoimento')">
         <ion-icon name="folder"></ion-icon>
       </ion-fab-button>

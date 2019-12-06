@@ -62,7 +62,7 @@ export class ProfilePage implements OnInit, OnChanges {
     private toastCtrl: ToastController,
     public imageHelper: ImageHelper,
     private camera: Camera,
-  ) {    
+  ) {
     this.profileService.getUserProfile().then(profile$ => {
       profile$.subscribe(userProfile => {
         this.userProfile = userProfile;
@@ -84,7 +84,7 @@ export class ProfilePage implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    
+
   }
 
   ngOnChanges() {
@@ -127,10 +127,10 @@ export class ProfilePage implements OnInit, OnChanges {
     console.log(this.userProfile);
 
     try {
-      await this.authService.updateProfile(this.userProfile);
+      this.authService.updateProfile(this.userProfile);
       await this.loading.dismiss();
     } catch (error) {
-      this.presentToast("Erro ao salvar! Tente novamente");
+      // this.presentToast('Erro!', "Erro ao salvar! Tente novamente", 'danger');
       this.loading.dismiss();
     }
   }
@@ -155,7 +155,101 @@ export class ProfilePage implements OnInit, OnChanges {
         {
           text: "Ok",
           handler: data => {
-            this.profileService.updateName(data.firstName);
+            console.log(data.firstName.match(/^(\s)+$/));
+            
+            if (data.firstName.match(/^(\s)+$/) || !data.firstName) {
+              this.presentToast('Aviso!', 'Nome não pode estar vazio!', 'warning')
+            } else {
+              this.profileService.updateName(data.firstName);
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async updateGroup(): Promise<void> {
+
+    const alert = await this.alertCtrl.create({
+      subHeader: 'Projeto de TCC',
+      inputs: [
+        {
+          type: "text",
+          name: "group",
+          value: this.userProfile.group
+        },
+      ],
+      buttons: [
+        { text: 'Cancelar' },
+        {
+          text: "Ok",
+          handler: data => {
+            console.log(data);
+            
+            if (data.group.match(/^(\s)+$/) || !data.group) {
+              this.presentToast('Aviso!', 'Nome do Projeto não pode estar vazio!', 'warning')
+            } else {
+              this.profileService.updateGroup(data.group);
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async updateField(): Promise<void> {
+
+    const alert = await this.alertCtrl.create({
+      subHeader: 'Profissão',
+      inputs: [
+        {
+          type: "text",
+          name: "field",
+          value: this.userProfile.field
+        },
+      ],
+      buttons: [
+        { text: 'Cancelar' },
+        {
+          text: "Ok",
+          handler: data => {
+            console.log(data);
+            
+            if (data.field.match(/^(\s)+$/) || !data.field) {
+              this.presentToast('Aviso!', 'Profissão não pode estar vazia!', 'warning')
+            } else {
+              this.profileService.updateField(data.field);
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async updateWhatsapp(): Promise<void> {
+
+    const alert = await this.alertCtrl.create({
+      subHeader: 'WhatsApp com DDD',
+      inputs: [
+        {
+          type: "number",
+          name: "whatsappNumber",
+          value: this.userProfile.whatsappNumber
+        },
+      ],
+      buttons: [
+        { text: 'Cancelar' },
+        {
+          text: "Ok",
+          handler: data => {            
+            if (data.whatsappNumber.match(/^(\s)+$/) || !data.whatsappNumber) {
+              this.presentToast('Aviso!', 'WhatsApp não pode estar vazio!', 'warning')
+            } else {
+              this.profileService.updateWhatsapp(data.whatsappNumber);
+            }
           }
         }
       ]
@@ -231,8 +325,8 @@ export class ProfilePage implements OnInit, OnChanges {
     return this.loading.present();
   }
 
-  async presentToast(message: string) {
-    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+  async presentToast(header: string, message: string, color: string) {
+    const toast = await this.toastCtrl.create({ header: header, message, duration: 2000, color: color });
     toast.present();
   }
 

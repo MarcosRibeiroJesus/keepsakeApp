@@ -11,9 +11,15 @@ export interface User {
 
 export interface UserProfile {
     uid?: string;
+
     email?: string;
     photoURL?: string;
     firstName?: string;
-    birthDate?: string;
     password?: string;
+    field?: string;
+    group?: string;
+    whatsappNumber?: string;
+    
+    birthDate?: string;
+   
 }

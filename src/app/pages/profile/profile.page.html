@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-card>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="biblioteca()">
           <ion-fab-button size="small" color="light">
@@ -17,13 +17,13 @@
           </ion-fab-button>
         </ion-fab>
     <img *ngIf="!userProfile?.photoURL" class="no-photo" src="./assets/img/graduates.svg" />
-    <img *ngIf="userProfile?.photoURL" class="no-photo" [src]="userProfile?.photoURL" />
+    <img *ngIf="userProfile?.photoURL" class="photo" [src]="userProfile?.photoURL" />
 
     <!-- <ion-card-content>
-      <ion-card-title text-center>
+      <ion-card-title class="ion-text-center">
         {{ userProfile?.firstName }}
       </ion-card-title>
-      <p text-center>{{ userProfile?.email }}</p>
+      <p class="ion-text-center">{{ userProfile?.email }}</p>
     </ion-card-content>  -->
   </ion-card>
 
@@ -62,7 +62,74 @@
     </ion-label>
   </ion-item>
 
-  <ion-item (click)="updateEmail()">
+
+  <ion-item (click)="updateGroup()">
+    <ion-label>
+      <ion-label class="text-left" size="5" translate>Projeto de TCC</ion-label>
+
+      <ion-input
+        class="text-center"
+        size="7"
+        *ngIf="userProfile?.group"
+        onChange="this.updateGroup()"
+      >
+        {{ userProfile?.group }}
+      </ion-input>
+      <ion-input
+        size="7"
+        class="placeholder-profile text-center"
+        *ngIf="!userProfile?.group"
+      >
+        <span translate> ClickToModify </span>
+      </ion-input>
+    </ion-label>
+  </ion-item>
+
+  <ion-item (click)="updateField()">
+    <ion-label>
+      <ion-label class="text-left" size="5" translate>Área de Atuação</ion-label>
+
+      <ion-input
+        class="text-center"
+        size="7"
+        *ngIf="userProfile?.field"
+        onChange="this.updateField()"
+      >
+        {{ userProfile?.field }}
+      </ion-input>
+      <ion-input
+        size="7"
+        class="placeholder-profile text-center"
+        *ngIf="!userProfile?.field"
+      >
+        <span translate> ClickToModify </span>
+      </ion-input>
+    </ion-label>
+  </ion-item>
+
+  <ion-item (click)="updateWhatsapp()">
+    <ion-label>
+      <ion-label class="text-left" size="5" translate>WhatsApp</ion-label>
+
+      <ion-input
+        class="text-center"
+        size="7"
+        *ngIf="userProfile?.whatsappNumber"
+        onChange="this.updateWhatsapp()"
+      >
+        {{ userProfile?.whatsappNumber }}
+      </ion-input>
+      <ion-input
+        size="7"
+        class="placeholder-profile text-center"
+        *ngIf="!userProfile?.whatsappNumber"
+      >
+        <span translate> ClickToModify </span>
+      </ion-input>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
     <ion-label>
       <ion-label class="text-left" size="5" translate>Email</ion-label>
       <ion-input class="text-center" size="7" *ngIf="userProfile?.email">
@@ -73,7 +140,7 @@
         class="placeholder-profile text-center"
         *ngIf="!userProfile?.email"
       >
-        <span translate> ClickToModify </span>
+        <span> Não carregado! </span>
       </ion-input>
     </ion-label>
   </ion-item>
@@ -85,13 +152,13 @@
     </ion-label>
   </ion-item> -->
 
-  <p text-center translate>Mapa do Evento</p>
+  <p class="ion-text-center" translate>Mapa do Evento</p>
 
   <ion-button expand="block" color="warning" href="https://www.google.com/maps/place/Faculdade+Fortium/@-15.8005995,-47.8832681,15z/data=!4m5!3m4!1s0x0:0x36fc959aebd94b88!8m2!3d-15.8005995!4d-47.8832681"
     >Fortium SBS</ion-button
   >
 
-  <p text-center translate>ChooseTheme</p>
+  <p class="ion-text-center" translate>ChooseTheme</p>
 
   <ion-button expand="block" color="medium" (click)="changeTheme('autumn')"
     >{{'Autumn' | translate}}</ion-button
@@ -107,7 +174,7 @@
   >
   <hr />
 
-  <p text-center translate>Escolha seu idioma favorito:</p>
+  <p class="ion-text-center" translate>Escolha seu idioma favorito:</p>
 
   <ion-button expand="block" [color]="selectedLanguage === 'pt-br' ? 'success' : 'medium'" (click)="switchLanguage('pt-br')"
     >{{'Portuguese' | translate}}</ion-button
